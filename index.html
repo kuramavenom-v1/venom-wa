@@ -18,8 +18,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
         }
 
         .container {
@@ -30,7 +31,7 @@
             border: 2px solid #0055ff;
             text-align: center;
             width: 90%;
-            max-width: 420px;
+            max-width: 450px;
             transition: all 0.3s ease-in-out;
         }
 
@@ -107,6 +108,46 @@
             display: none;
             text-shadow: 0 0 5px rgba(255, 51, 51, 0.3);
         }
+
+        /* تنسيق إطار الشرح المتوهج الخاص بفينوم */
+        .info-box {
+            background-color: #030712;
+            border: 2px solid #0055ff;
+            box-shadow: inset 0 0 10px rgba(0, 85, 255, 0.3), 0 0 15px rgba(0, 85, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: right;
+            margin-bottom: 25px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #e0e6ed;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .info-box p {
+            margin-bottom: 8px;
+        }
+
+        .info-box .note {
+            color: #ff3333;
+            font-weight: bold;
+            margin-top: 12px;
+            text-shadow: 0 0 5px rgba(255, 51, 51, 0.2);
+        }
+        
+        .english-text {
+            direction: ltr;
+            text-align: left;
+            background: #0b0f19;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px dashed #0044cc;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            word-break: break-word;
+        }
     </style>
 </head>
 <body>
@@ -117,6 +158,26 @@
         <div class="error-msg" id="error-text">الباسورد غير صحيح!</div>
         <input type="password" id="password-input" placeholder="••••">
         <button onclick="checkPassword()">دخول</button>
+    </div>
+
+    <div id="explain-section" class="hidden">
+        <h2>شرح الثغرة</h2>
+        <div class="info-box">
+            <p>السلام عليكم..</p>
+            <p>ثغره الفنش حقت فينوم</p>
+            <p>كيف تشغل الثغره ؟</p>
+            <p>1 - ارسال الانتهاك البريدي اكثر من ×7 ايميلات</p>
+            <p>2 - الشد من من رقمين موثقين +50 بلاغ</p>
+            <p>3 - تنتظر شوي بيجيك رساله على البريد تكلم الدعم واتس.</p>
+            <p>4 - اول ما يفتح معك شات الدعم ترسل له طلب المراجعه ذا :</p>
+            <div class="english-text">
+                Hello WhatsApp support, I'm being harassed by this immoral person. He's stalking me everywhere and threatening to have my account banned. He's also sending illegal content. I received a message from him in a group chat; he's sending child pornography to a 13-year-old. This number is extremely dangerous. It's ( رقم المستهدف )
+            </div>
+            <p>5 - تروح ل الهدف خاص لازم يرد عليك اول ما يرد بلغ بلاغ واحد مع بلوك بعدها فك البوك و بلغ بلاغ مع بلوك ثاني بعدها فكه</p>
+            <p>6 - رح وثق شف اذا تبند او لا اذا ما تلند ارجع شد عليه شوي و يطير</p>
+            <p class="note">Note : ( الثغره تحت التطوير )</p>
+        </div>
+        <button onclick="goToActionPage()">ارسال الانتهاك البريدي</button>
     </div>
 
     <div id="action-section" class="hidden" class="action-box">
@@ -144,11 +205,16 @@
 
         if (userInput === SECRET_PASSWORD) {
             document.getElementById("login-section").classList.add("hidden");
-            document.getElementById("action-section").classList.remove("hidden");
+            document.getElementById("explain-section").classList.remove("hidden");
         } else {
             errorText.style.display = "block";
             document.getElementById("password-input").value = "";
         }
+    }
+
+    function goToActionPage() {
+        document.getElementById("explain-section").classList.add("hidden");
+        document.getElementById("action-section").classList.remove("hidden");
     }
 
     function sendSupportEmail() {
