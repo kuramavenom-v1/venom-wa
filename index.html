@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUROMA SYSTEM</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #05070f; color: #e0e6ed; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { background-color: #0b0f19; padding: 40px 30px; border-radius: 16px; box-shadow: 0 0 20px rgba(0, 119, 255, 0.2), 0 0 40px rgba(0, 119, 255, 0.1); border: 2px solid #0055ff; text-align: center; width: 90%; max-width: 420px; }
+        h2 { margin-bottom: 25px; color: #0084ff; font-size: 24px; text-shadow: 0 0 10px rgba(0, 132, 255, 0.6); }
+        input[type="password"] { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #0044cc; border-radius: 8px; background-color: #030712; color: #ffffff; font-size: 16px; text-align: center; letter-spacing: 3px; }
+        input[type="password"]:focus { outline: none; border-color: #0084ff; box-shadow: 0 0 15px rgba(0, 132, 255, 0.5); }
+        button { width: 100%; padding: 14px; background: linear-gradient(135deg, #0055ff, #0033aa); color: #ffffff; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 0 15px rgba(0, 85, 255, 0.4); transition: all 0.3s ease; }
+        button:hover { background: linear-gradient(135deg, #0077ff, #0044cc); box-shadow: 0 0 25px rgba(0, 119, 255, 0.8); transform: translateY(-1px); }
+        .hidden { display: none; }
+        .action-box p { margin-bottom: 25px; font-size: 14px; color: #7085a0; line-height: 1.6; }
+        .error-msg { color: #ff3333; font-size: 14px; margin-bottom: 15px; display: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="login-section">
+        <h2>نظام الاختراق والمراجعة</h2>
+        <div class="error-msg" id="error-text">الباسورد غير صحيح!</div>
+        <input type="password" id="password-input" placeholder="••••">
+        <button onclick="checkPassword()">دخول</button>
+    </div>
+    <div id="action-section" class="hidden">
+        <h2>لوحة إرسال البلاغات</h2>
+        <p>سيقوم النظام بفتح البريد فوراً وتعبئة الموضوع الإعلاني مع نص المراجعة لإيميلات دعم واتساب الثلاثة.</p>
+        <button onclick="sendSupportEmail()" style="background: linear-gradient(135deg, #0084ff, #0055ff); box-shadow: 0 0 20px rgba(0, 132, 255, 0.6);">إرسال المراجعة فوراً</button>
+    </div>
+</div>
+<script>
+    const SECRET_PASSWORD = "kmv"; 
+    const emailList = ["support@support.whatsapp.com", "android_web@support.whatsapp.com", "iphone_web@support.whatsapp.com"];
+    const emailSubject = "Uso de linguagem árabe inadequada, danos psicológicos a crianças e insultos contra mulheres honradas.";
+    const emailBody = "Someone in one of the groups I'm in insulted me and another 13-year-old boy who uses WhatsApp. He sent inappropriate messages to this boy and also sent them to me. I hope WhatsApp support will address this unethical behavior and take security measures against this individual.\n\nThis is his number : (  )";
+
+    function checkPassword() {
+        const userInput = document.getElementById("password-input").value;
+        const errorText = document.getElementById("error-text");
+        if (userInput === SECRET_PASSWORD) {
+            document.getElementById("login-section").classList.add("hidden");
+            document.getElementById("action-section").classList.remove("hidden");
+        } else {
+            errorText.style.display = "block";
+            document.getElementById("password-input").value = "";
+        }
+    }
+    function sendSupportEmail() {
+        const toEmails = emailList.join(",");
+        const mailtoUrl = `mailto:${toEmails}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+        window.location.href = mailtoUrl;
+    }
+</script>
+</body>
+</html>
