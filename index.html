@@ -189,7 +189,7 @@
 </div>
 
 <script>
-    const SECRET_PASSWORD = "komva-ku-wa"; 
+    const SECRET_PASSWORD_HASH = "a29tdmEta3Utd2E=";
 
     const emailList = [
         "support@support.whatsapp.com",
@@ -203,7 +203,9 @@
         const userInput = document.getElementById("password-input").value;
         const errorText = document.getElementById("error-text");
 
-        if (userInput === SECRET_PASSWORD) {
+        const encodedInput = btoa(userInput);
+
+        if (encodedInput === SECRET_PASSWORD_HASH) {
             document.getElementById("login-section").classList.add("hidden");
             document.getElementById("explain-section").classList.remove("hidden");
         } else {
@@ -219,6 +221,7 @@
 
     function sendSupportEmail() {
         const numInput = document.getElementById("target-number").value.trim();
+
         if(!numInput) {
             alert("يرجى إدخال الرقم أولاً!");
             return;
@@ -228,6 +231,7 @@
 
         const toEmails = emailList.join(",");
         const mailtoUrl = `mailto:${toEmails}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
         window.location.href = mailtoUrl;
     }
 </script>
