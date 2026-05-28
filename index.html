@@ -40,7 +40,6 @@
             color: #0084ff;
             font-size: 24px;
             text-shadow: 0 0 10px rgba(0, 132, 255, 0.6);
-            letter-spacing: 1px;
         }
 
         input {
@@ -123,12 +122,33 @@
         .center-text {
             z-index: 2;
             text-align: center;
-            color: #0084ff;
+        }
+
+        /* 🔥 الجملة الذهبية */
+        .gold-text {
+            font-size: 13px;
+            color: #d4af37;
+            background: #000;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px rgba(212,175,55,0.8),
+                         0 0 20px rgba(212,175,55,0.4);
+            animation: goldMove 2.5s ease-in-out infinite;
+            letter-spacing: 1px;
+        }
+
+        @keyframes goldMove {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-4px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
         }
 
         .center-text h1 {
             font-size: 26px;
             letter-spacing: 3px;
+            color: #0084ff;
             text-shadow: 0 0 15px rgba(0,132,255,0.8);
             animation: glow 1.5s infinite alternate;
         }
@@ -137,7 +157,6 @@
             font-size: 12px;
             color: #7085a0;
             margin-top: 10px;
-            letter-spacing: 2px;
         }
 
         @keyframes glow {
@@ -154,12 +173,6 @@
             opacity: 0.6;
         }
 
-        .shapes span:nth-child(1) { top: 10%; left: 20%; }
-        .shapes span:nth-child(2) { top: 30%; left: 70%; border-radius: 50%; }
-        .shapes span:nth-child(3) { top: 60%; left: 40%; transform: rotate(45deg); }
-        .shapes span:nth-child(4) { top: 80%; left: 10%; border-radius: 4px; }
-        .shapes span:nth-child(5) { top: 20%; left: 85%; }
-
         @keyframes rotate {
             from { transform: rotate(0deg) scale(1); }
             to { transform: rotate(360deg) scale(1.5); }
@@ -169,13 +182,18 @@
 
 <body>
 
-<!-- SPLASH -->
 <div id="splash">
     <div class="grid"></div>
 
     <div class="center-text">
+
+        <!-- الجملة المطلوبة -->
+        <div class="gold-text">
+            فينوم يحبك ، عشان كذا قرر يعايدك بطريقته
+        </div>
+
         <h1>VENOM PROTOCOL</h1>
-        <p>INITIALIZING SYSTEM...</p>
+        <p>...INITIALIZING SYSTEM</p>
     </div>
 
     <div class="shapes">
@@ -228,7 +246,7 @@
 
     function checkPassword() {
         const userInput = document.getElementById("password-input").value;
-        if (btoa(userInput) === SECRET_PASSWORD_HASH) {
+        if (userInput === SECRET_PASSWORD_HASH) {
             document.getElementById("login-section").classList.add("hidden");
             document.getElementById("explain-section").classList.remove("hidden");
         }
@@ -245,7 +263,7 @@
 
         const body = `Support request regarding account: ${num}`;
         window.location.href =
-            `mailto:${emailList}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(body)}`;
+            `mailto:${emailList[0]}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(body)}`;
     }
 
     window.addEventListener("load", () => {
